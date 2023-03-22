@@ -22,7 +22,7 @@ class MyCmd(cmd.Cmd):
         else:
             return addresses
     def do_pull(self, line):
-        print(f'sending: {line}')
+        print(f'pulling: {line}')
 
     def complete_pull(self, text, line, start_index, end_index):
         if text:
@@ -32,6 +32,18 @@ class MyCmd(cmd.Cmd):
             ]
         else:
             return addresses
+
+    def complete_pull_subcommand_force(self, text, line, start_index, end_index):
+        if text:
+            return [
+                answer for answer in ['yes', 'no']
+                if answer.startswith(text)
+            ]
+        else:
+            return ['yes', 'no']
+
+    def do_pull_subcommand_force(self, line):
+        print(f'subcommand force {line}')         
 
     def do_exit(self, line):
         sys.exit(0)
